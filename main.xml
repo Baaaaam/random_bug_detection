@@ -5,7 +5,7 @@
     <duration>1200</duration>
     <startmonth>1</startmonth>
     <startyear>2015</startyear>
-    <decay>never</decay>
+    <decay>lazy</decay>
   </control>
 
   <archetypes>
