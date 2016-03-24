@@ -79,16 +79,10 @@
     <config>
       <DeployInst>
         <prototypes>
-          <val>waste</val>
           <val>blanket_Upu_limited_source</val>
           <val>PWR_Upu_limited_source</val>
           <val>blanket_Upu_limited_storage</val>
-          <val>PWR_cooling</val>
-          <val>PWR_storage</val>
-          <val>PWR_separation</val>
           <val>PWR_storage_Upu</val>
-          <val>PWR_storage_fp</val>
-          <val>PWR_storage_ma</val>
         </prototypes>
 
         <build_times>
@@ -96,21 +90,9 @@
           <val>1</val>
           <val>1</val>
           <val>1</val>
-          <val>1</val>
-          <val>1</val>
-          <val>1</val>
-          <val>1</val>
-          <val>1</val>
-          <val>1</val>
         </build_times>
 
         <n_build>
-          <val>1</val>
-          <val>1</val>
-          <val>1</val>
-          <val>1</val>
-          <val>1</val>
-          <val>1</val>
           <val>1</val>
           <val>1</val>
           <val>1</val>
