@@ -1,12 +1,10 @@
 #! /usr/bin/env python
-from __future__ import print_function, unicode_literals
-import xlwings as xw
 import os
-import sys
 import subprocess
-import io
 import numpy as np
-import re
+import matplotlib.mlab as mlab
+import matplotlib.pyplot as plt
+
 
 
 def run_cyclus():
@@ -24,8 +22,16 @@ def count():
   return int(output)
 
 def main():
-  run_cyclus()
-  print("count", count())
+  val = []
+  for i in range(10):
+    run_cyclus()
+    val.append(count())
+  bins , edge = np.histogram(val)
+  print(bins)
+  plt.hist(val)
+  plt.savefig('results_1.png')
+  plt.show()
+
 
 
 
