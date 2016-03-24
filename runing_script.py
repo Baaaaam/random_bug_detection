@@ -23,7 +23,7 @@ def count():
 
 def main():
   val = []
-  for i in range(10):
+  for i in range(1000):
     run_cyclus()
     val.append(count())
   bins , edge = np.histogram(val)
