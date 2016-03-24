@@ -1,0 +1,196 @@
+<My_include>
+
+  <!-- Comodity list & definition:
+
+   * PWR_MOX_new    : new MOX fuel for PWR
+   * PWR_MOX_spent  : spent MOX fuel for PWR
+   * PWR_MOX_cooled : spent MOX fuel for PWR AFTER COOLING
+   * PWR_MOX_stored : spent MOX fuel for PWR AVAILABLE in storage
+
+   * PWR_pu : pu after separation
+   * PWR_ma : ma after separation
+   * PWR_fp : fp after separation
+   * PWR_ru : ru after separation
+
+   * PWR_pu_stored : pu AVAILABLE in storage
+   * PWR_ma_stored : ma AVAILABLE in storage
+   * PWR_fp_stored : fp AVAILABLE in storage
+   * PWR_ru_stored : ru AVAILABLE in storage
+
+   * FBR_blanket_pu_stored  : pu from FBR blanket
+   * FBR_blanket_ru_stored  : ru from FBR blanket
+   * EXT2_blanket_pu_stored : pu form EXT source 2
+   * EXT2_ru_stored         : ru from EXT source 2
+
+   -->
+
+
+<!--      PWR fabrication      -->
+  <prototype>
+    <name>PWR_fabrication</name>
+<!--    <lifetime>960</lifetime> -->
+    <config>
+      <FuelFab>
+
+        <fiss_commods>
+          <val>FBR_blanket_Upu_stored</val>
+        </fiss_commods>
+
+        <fiss_recipe>FBR_blanket_Upu</fiss_recipe>
+        <fiss_size>5000</fiss_size>
+
+        <fill_commods>
+          <val>PWR_Upu_stored</val>
+        </fill_commods>
+
+        <fill_recipe>PWR_Upu</fill_recipe>
+       <fill_commod_prefs>
+          <val>1.0</val>
+        </fill_commod_prefs>
+
+        <fill_size>25000</fill_size>
+
+        <throughput>29565</throughput>
+        <spectrum>thermal</spectrum>
+        <outcommod>PWR_MOX_new</outcommod>
+
+      </FuelFab>
+    </config>
+  </prototype>
+  <!-- *********************** -->
+
+  <!--       PWR reactor       -->
+  <prototype>
+  <name>PWR</name>
+  <lifetime>960</lifetime>
+  <config>
+    <Reactor>
+      <fuel_inrecipes>  <val>PWR_MOX_new</val></fuel_inrecipes>
+      <fuel_incommods>  <val>PWR_MOX_new</val></fuel_incommods>
+
+      <fuel_outrecipes> <val>PWR_MOX_spent</val></fuel_outrecipes>
+      <fuel_outcommods> <val>PWR_MOX_spent</val></fuel_outcommods>
+
+      <cycle_time>18</cycle_time>
+      <refuel_time>0</refuel_time>
+      <assem_size>29565</assem_size>
+      <n_assem_core>3</n_assem_core>
+      <n_assem_batch>1</n_assem_batch>
+      <power_cap>900</power_cap>
+
+    </Reactor>
+  </config>
+</prototype>
+<!-- *********************** -->
+
+<!--       PWR Cooling       -->
+<prototype>
+  <name>PWR_cooling</name>
+  <config>
+    <Storage>
+      <in_commods> <val>PWR_MOX_spent</val></in_commods>
+      <out_commods> <val>PWR_MOX_spent_cooled</val></out_commods>
+      <residence_time>84</residence_time>
+    </Storage>
+  </config>
+</prototype>
+<!-- *********************** -->
+
+<!--       PWR Storage       -->
+<prototype>
+  <name>PWR_storage</name>
+  <config>
+    <Storage>
+      <in_commods> <val>PWR_MOX_spent_cooled</val></in_commods>
+      <out_commods> <val>PWR_MOX_spent_stored</val></out_commods>
+      <residence_time>0</residence_time>
+    </Storage>
+  </config>
+</prototype>
+<!-- *********************** -->
+
+<!--      PWR Separation     -->
+<prototype>
+  <name>PWR_separation</name>
+  <config>
+    <Separations>
+      <feedbuf_size>1e100</feedbuf_size>
+
+      <feed_commods>
+        <val>PWR_MOX_spent_stored</val>
+      </feed_commods>
+
+      <feed_commod_prefs>
+        <val>1.0</val>
+      </feed_commod_prefs>
+
+      <throughput>1e100</throughput>
+
+      <streams>
+        <item>
+          <commod>PWR_Upu</commod>
+          <info>
+            <buf_size>1e100</buf_size>
+            <efficiencies>
+              <item> <comp>Pu</comp> <eff>.988</eff> </item>
+              <item> <comp>U</comp> <eff>.988</eff> </item>
+            </efficiencies>
+          </info>
+        </item>
+
+      </streams>
+
+      <leftover_commod>waste</leftover_commod>
+
+    </Separations>
+  </config>
+</prototype>
+<!-- *********************** -->
+
+<!--      PWR U/pu storage     -->
+<prototype>
+  <name>PWR_storage_Upu</name>
+  <config>
+    <Storage>
+      <in_commods>
+        <val>PWR_Upu</val>
+        <val>PWR_Upu_initial</val>
+      </in_commods>
+      <out_commods> <val>PWR_Upu_stored</val></out_commods>
+      <residence_time>0</residence_time>
+    </Storage>
+  </config>
+</prototype>
+
+<!-- *********************** -->
+
+<!--      PWR fp storage     -->
+<prototype>
+  <name>PWR_storage_fp</name>
+  <config>
+    <Storage>
+      <in_commods> <val>PWR_fp</val></in_commods>
+      <out_commods> <val>PWR_fp_stored</val></out_commods>
+      <residence_time>0</residence_time>
+    </Storage>
+  </config>
+</prototype>
+<!-- *********************** -->
+
+<!--      PWR ma storage     -->
+<prototype>
+  <name>PWR_storage_ma</name>
+  <config>
+    <Storage>
+      <in_commods> <val>PWR_ma</val></in_commods>
+      <out_commods> <val>PWR_ma_stored</val></out_commods>
+      <residence_time>0</residence_time>
+    </Storage>
+  </config>
+</prototype>
+<!-- *********************** -->
+
+
+<!-- *********************** -->
+
+</My_include>
