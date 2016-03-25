@@ -13,7 +13,6 @@ def run_cyclus():
   #output = subprocess.check_output(cmd.split())
   cmd2 = 'cyclus main.xml >/dev/null 2>&1'
   os.system(cmd2)
-  print("run done!")
 
 def count():
   counting_cmd = 'cyan -db cyclus.sqlite inv PWR_Upu_limited_source |grep " 0" |wc -l'
@@ -26,6 +25,7 @@ def main():
   for i in range(1000):
     run_cyclus()
     val.append(count())
+    print(i)
   bins , edge = np.histogram(val)
   print(bins)
   plt.hist(val)
