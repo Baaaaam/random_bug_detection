@@ -22,7 +22,7 @@ def count():
 
 def main():
   val = []
-  for i in range(1000):
+  for i in range(100):
     run_cyclus()
     val.append(count())
     print(i)
